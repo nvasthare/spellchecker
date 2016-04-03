@@ -2,14 +2,33 @@
 
 
 {% block content %}
-    <div class="post">
-        {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }}
-            </div>
-        {% endif %}
+    <!-- <div class="post">
         <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 
         <p>{{ post.text|linebreaks }}</p>
+    </div> -->
+
+    <div class="post2">
+    	<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    	{% for word in text %}
+    		{% if word in spellingerrors %}
+    			<mark>{{ word }}</mark>
+    		{%else%}
+    			<abbr>{{ word }}</abbr>
+    		{%endif%}
+    	{% endfor %}
+    </div>
+
+    <div class="spelling">
+    	<h3>{{ "Spelling errors?" }}</h3>
+    </div>
+
+    <div>
+    	{% for error in spellingerrors %}
+
+    		<p>{{ error|linebreaks}}</p>
+    		<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}">Yes</a>
+    		<a class="btn btn-default" href="{% url 'post_detail' pk=post.pk %}">No</a>
+    	{% endfor %}
     </div>
 {% endblock %}

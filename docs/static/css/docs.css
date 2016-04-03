@@ -12,6 +12,11 @@ a {
     color: #000000;
 }
 
+mark {
+    background-color: white;
+    color: red;
+}
+
 .page-header {
     background-color: #FF1493;
     margin-top: 0;
