@@ -10,11 +10,11 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     spellingerrors = []
-    # for word in post.text.split():
-    # 	spellingerrors.append(word)
-    	# break
-    spellingerrors.append(post.text.split()[1])
-    spellingerrors.append(post.text.split()[4])
+    for word in post.text.split():
+    	spellingerrors.append(word)
+    	break
+    # spellingerrors.append(post.text.split()[1])
+    # spellingerrors.append(post.text.split()[4])
     print post.text.split()
     return render(request, 'docs/post_detail.html', 
     	{'post': post, 'spellingerrors': spellingerrors, 'text': post.text.split()})
