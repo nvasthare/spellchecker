@@ -1,9 +1,103 @@
 {% extends 'docs/base.html' %}
 
 {% block content %}
-    <h1>New post</h1>
+    <h1>Type below:</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        <!-- <button type="submit" class="save btn btn-default">Save</button> -->
     </form>
+   <!--  <div id="foo">
+	</div> -->
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script>
+<script type="text/javascript">
+
+function runPyScript(input){
+	    var jqXHR = $.ajax({
+	        type: "POST",
+	        url: "http://127.0.0.1:5000/",
+	        async: false,
+	        data: {params : input},
+	        datatype: "text",
+	        success: function(result){
+        	console.log(result);
+		    },
+		    error: function(){
+		        console.log('error');
+		    }   
+	    });
+	    return jqXHR.responseText;
+	}
+
+//http://stackoverflow.com/questions/1181700/set-cursor-position-on-contenteditable-div?lq=1
+function setEndOfContenteditable(contentEditableElement)
+{
+    var range,selection;
+    if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+    {
+    	// console.log('if')
+        range = document.createRange();//Create a range (a range is a like the selection but invisible)
+        range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+        selection = window.getSelection();//get the selection object (allows you to change selection)
+        selection.removeAllRanges();//remove any selections already made
+        selection.addRange(range);//make the range you have just created the visible selection
+    }
+    // console.log('else')
+}
+
+// var dictionary = ['some', 'text', 'with', 'wrong', 'words', 'hello', 'this', 'is', 'a', 'post'];
+// console.log('hi')
+$('textarea').hide().before('<div id="foo" class="blah" contenteditable="true"/>');
+$('.blah').html($('textarea').val()).keypress(function(e){
+	var key = e.which;
+	// console.log(key)
+	if (key == 32 || key == 13) {
+
+    	$('textarea').val(jQuery(this).text()); //take the plain text, not the span
+	    var words = $(this).text().split(' ');
+	    for (var i = 0; i < words.length; i++)
+	    {
+	    	response = runPyScript(words[i]);
+	    	console.log(response)
+	        if(response == -1) // your function here to test for correct spelling
+	        {
+	            words[i] = '<span class="jquery-spelling-incorrect">' + words[i] + '</span>';
+	        }
+	    }
+	    $(this).html(words.join(' '));
+	    elem = document.getElementById('foo');//This is the element that you want to move the caret to the end of
+		setEndOfContenteditable(elem);
+
+	}
+});
+
+// var dvHTML = 'AAAA <span style="text-decoration: underline;">Hello world</span> BBBB';
+
+// $("#foo").html(dvHTML).click(function() {
+//     this.contentEditable = true;                
+// });
+
+	
+	
+
+  //   $(document).ready(function(){
+  //   	$(this).keypress(function (e) {
+  //   		var key = e.which;
+  //   		if (key == 32) {
+  //   			// $(this).css('color', 'red');
+  //   			value = $(this).val();
+  //   			response = runPyScript(value);
+  //   			console.log(response);
+  //   		}
+		// });
+  //   });
+
+</script>
+
+<!-- <input type="textarea" id="textarea"  /> -->
+
+
+
 {% endblock %}

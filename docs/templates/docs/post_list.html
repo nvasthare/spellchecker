@@ -5,9 +5,22 @@ a {color:black;}
 </style>
 
 {% block content %}
-{% for post in posts %}
+
+<h1> Choose a language: </h1>
+
+{% for lang in langs %}
     <div class="post">
-        <p><a href="{% url 'post_detail' pk=post.pk %}">{{ post.text | linebreaks }}</a></p>
+        {% if lang == 0 %}
+            <li><a href="{% url 'post_edit' l=lang%}">{{ 'English' }}</a></li>
+        {% elif lang == 1 %}
+            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Spanish' }}</a></li>
+        {% elif lang == 2 %}
+            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Vietnamese' }}</li></p>
+        {% elif lang == 3 %}
+            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Hindi' }}</li></p>
+        {% elif lang == 4 %}
+            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Farsi' }}</li></p>
+        {% endif %}
     </div>
 {% endfor %}
 {% endblock %}
