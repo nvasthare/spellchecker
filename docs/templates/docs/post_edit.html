@@ -227,13 +227,13 @@
                                 this.highlighterContainer.bind('click', function() {
                                     scope.textarea.focus();
                                 });
-                                this.textarea.bind('keyup', function(e) {
+                                this.textarea.bind('keyup', function() {
                                     // when we type in the textarea, 
                                     // we want the text to be processed and re-injected into the div behind it.
-                                    var key = e.which;
-                                    if (key == 32) {
+                                    // var key = e.which;
+                                    // if (key == 32) {
                                     	scope.applyText($(this).val());
-                                    }
+                                    // }
                                 });
                             } catch (err) {
                                 this.error(err);
@@ -270,7 +270,7 @@
                                 			console.log('before' + text);
 								        	// words[i] = words[i]
 	                                    	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">'+words[i] + '</span>',words[i]);
-	                                    	text = this.replaceAll(text,' '+ words[i] +' ' ,' '+ '<span style="background-color: #ffb3b3;">' +words[i] +'</span>' +' ');
+	                                    	text = this.replaceAll(text,' '+ words[i] +' ' ,' '+ '<span style="background-color: #ffb3b3;">' + words[i] +'</span>' +' ');
                                 			console.log('after' + text);
 	                                   	
 	                                    }
