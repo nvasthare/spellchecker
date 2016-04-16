@@ -169,7 +169,7 @@
                                     'position':         'absolute',
                                     'left':             '0',
                                     'top':              '0',
-                                    'border':           '1px dashed #ff0000',
+                                    'border':           '1px dashed #ffffff',
                                     'width':            this.options.width,
                                     'height':           this.options.height,
                                     'cursor':           'text'
@@ -186,7 +186,7 @@
                                 this.highlighter.css({
 
                                     'padding':          '7px',
-                                    'color':            '#eeeeee',
+                                    'color':            '#ffffff',
                                     'background-color': '#ffffff',
                                     'margin':           '0px',
                                     'font-size':        '11px',
@@ -228,7 +228,7 @@
 
                                 // replace the words by a highlighted version of the words
                                 for (var i=0;i<this.options.words.length;i++) {
-                                    text = this.replaceAll(text,this.options.words[i],'<span style="background-color: #D8DFEA;">'+this.options.words[i]+'</span>');
+                                    text = this.replaceAll(text,this.options.words[i],'<span style="background-color: #ffb3b3;">'+this.options.words[i]+'</span>');
                                 }
 
                                 // re-inject the processed text into the div
