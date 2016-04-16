@@ -2,10 +2,10 @@
 
 {% block content %}
     <h1>Type below:</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
+    <!-- <form method="POST" class="post-form">{% csrf_token %} -->
         <!-- {{ form.as_p }} -->
         <!-- <button type="submit" class="save btn btn-default">Save</button> -->
-    </form>
+    <!-- </form> -->
    <!--  <div id="foo">
 	</div> -->
 
@@ -104,7 +104,7 @@
 	function runPyScript(input){
 	    var jqXHR = $.ajax({
 	        type: "POST",
-	        url: "http://natashavasthare.pythonanywhere.com/",
+	        url: "http://127.0.0.1:5000/",
 	        async: false,
 	        data: {params : input},
 	        datatype: "text",
@@ -254,10 +254,11 @@
                                 // console.log(words);
                                 // console.log(text);
                                 // replace the words by a highlighted version of the words
-                                for (var i=0;i<words.length;i++) {
+                                for (var i=0;i<words.length - 1;i++) {
                                 	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
                                 	// text = this.replaceAll(text,'</span>','')
                                 	// console.log(text);
+                                	console.log(words);
                                 	// console.log(words[i]);
                                 	if (words[i] != "" && words[i] != '\n' && words[i] != 'span' && words[i] != 'style' 
                                 		&& words[i] != 'background-color:' && words[i] != '<' && words[i] != '/' 
