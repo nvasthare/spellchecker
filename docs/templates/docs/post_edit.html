@@ -60,12 +60,12 @@
 // 	    var words = $(this).text().split(' ');
 // 	    for (var i = 0; i < words.length; i++)
 // 	    {
-// 	    	response = runPyScript(words[i]);
-// 	    	console.log(response)
-// 	        if(response == -1) // your function here to test for correct spelling
-// 	        {
-// 	            words[i] = '<span class="jquery-spelling-incorrect">' + words[i] + '</span>';
-// 	        }
+	    	// response = runPyScript(words[i]);
+	    	// console.log(response)
+	     //    if(response == -1) // your function here to test for correct spelling
+	     //    {
+	     //        words[i] = '<span class="jquery-spelling-incorrect">' + words[i] + '</span>';
+	     //    }
 // 	    }
 // 	    $(this).html(words.join(' '));
 // 	    elem = document.getElementById('foo');//This is the element that you want to move the caret to the end of
@@ -99,11 +99,31 @@
 <!-- http://stackoverflow.com/questions/142527/highlight-text-inside-of-a-textarea?rq=1 -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
         <!-- The javascript xontaining the plugin and the code to init the plugin -->
-        <script type="text/javascript">
+<script type="text/javascript">
+
+	function runPyScript(input){
+	    var jqXHR = $.ajax({
+	        type: "POST",
+	        url: "http://natashavasthare.pythonanywhere.com/",
+	        async: false,
+	        data: {params : input},
+	        datatype: "text",
+	        success: function(result){
+        	console.log(result);
+		    },
+		    error: function(){
+		        console.log('error');
+		    }   
+	    });
+	    return jqXHR.responseText;
+	}
+
+
             $(function() {
                 // let's init the plugin, that we called "highlight".
                 // We will highlight the words "hello" and "world", 
                 // and set the input area to a widht and height of 500 and 250 respectively.
+
                 $("#container").highlight({
                     words:  ["hello","world"],
                     width:  500,
@@ -207,10 +227,13 @@
                                 this.highlighterContainer.bind('click', function() {
                                     scope.textarea.focus();
                                 });
-                                this.textarea.bind('keyup', function() {
+                                this.textarea.bind('keyup', function(e) {
                                     // when we type in the textarea, 
                                     // we want the text to be processed and re-injected into the div behind it.
-                                    scope.applyText($(this).val());
+                                    var key = e.which;
+                                    if (key == 32) {
+                                    	scope.applyText($(this).val());
+                                    }
                                 });
                             } catch (err) {
                                 this.error(err);
@@ -223,12 +246,35 @@
 
                                 // parse the text:
                                 // replace all the line braks by <br/>, and all the double spaces by the html version &nbsp;
-                                text = this.replaceAll(text,'\n','<br/>');
-                                text = this.replaceAll(text,'  ','&nbsp;&nbsp;');
-
+                                // text = this.replaceAll(text,'\n','<br/>');
+                                // text = this.replaceAll(text,'  ','&nbsp;&nbsp;');
+                                // text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
+                                text = ' ' + text
+                                var words = text.split(' ');
+                                // console.log(words);
+                                // console.log(text);
                                 // replace the words by a highlighted version of the words
-                                for (var i=0;i<this.options.words.length;i++) {
-                                    text = this.replaceAll(text,this.options.words[i],'<span style="background-color: #ffb3b3;">'+this.options.words[i]+'</span>');
+                                for (var i=0;i<words.length;i++) {
+                                	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
+                                	// text = this.replaceAll(text,'</span>','')
+                                	// console.log(text);
+                                	// console.log(words[i]);
+                                	if (words[i] != "" && words[i] != '\n' && words[i] != 'span' && words[i] != 'style' 
+                                		&& words[i] != 'background-color:' && words[i] != '<' && words[i] != '/' 
+                                		&& words[i] != ':' && words[i] != '"' && words[i] != '>') {
+                                		response = runPyScript(words[i]);
+							    		console.log(response)
+							    	
+								        if(response == -1) // your function here to test for correct spelling
+								        {
+                                			console.log('before' + text);
+								        	// words[i] = words[i]
+	                                    	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">'+words[i] + '</span>',words[i]);
+	                                    	text = this.replaceAll(text,' '+ words[i] +' ' ,' '+ '<span style="background-color: #ffb3b3;">' +words[i] +'</span>' +' ');
+                                			console.log('after' + text);
+	                                   	
+	                                    }
+	                                }
                                 }
 
                                 // re-inject the processed text into the div
@@ -241,6 +287,8 @@
                         };
                         // "replace all" function
                         pluginClass.prototype.replaceAll = function(txt, replace, with_this) {
+                        	console.log(txt);
+                        	console.log(replace);
                             return txt.replace(new RegExp(replace, 'g'),with_this);
                         }
 
