@@ -2,10 +2,10 @@
 
 {% block content %}
     <h1>Type below:</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+    <!-- <form method="POST" class="post-form">{% csrf_token %} -->
+        <!-- {{ form.as_p }} -->
         <!-- <button type="submit" class="save btn btn-default">Save</button> -->
-    </form>
+    <!-- </form> -->
    <!--  <div id="foo">
 	</div> -->
 
@@ -19,8 +19,8 @@
 function runPyScript(input){
         var jqXHR = $.ajax({
             type: "POST",
-            url: "http://natashavasthare.pythonanywhere.com/",
-            // url: "http://127.0.0.1:5000/",
+            // url: "http://natashavasthare.pythonanywhere.com/",
+            url: "http://127.0.0.1:5000/",
             async: false,
             data: {params : input},
             datatype: "text",
@@ -43,47 +43,47 @@ function myFunction() {
 
 
 // //http://stackoverflow.com/questions/1181700/set-cursor-position-on-contenteditable-div?lq=1
-function setEndOfContenteditable(contentEditableElement)
-{
-    var range,selection;
-    if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
-    {
-    	// console.log('if')
-        range = document.createRange();//Create a range (a range is a like the selection but invisible)
-        range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
-        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
-        selection = window.getSelection();//get the selection object (allows you to change selection)
-        selection.removeAllRanges();//remove any selections already made
-        selection.addRange(range);//make the range you have just created the visible selection
-    }
-    // console.log('else')
-}
+// function setEndOfContenteditable(contentEditableElement)
+// {
+//     var range,selection;
+//     if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+//     {
+//     	// console.log('if')
+//         range = document.createRange();//Create a range (a range is a like the selection but invisible)
+//         range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+//         range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+//         selection = window.getSelection();//get the selection object (allows you to change selection)
+//         selection.removeAllRanges();//remove any selections already made
+//         selection.addRange(range);//make the range you have just created the visible selection
+//     }
+//     // console.log('else')
+// }
 
 // var dictionary = ['some', 'text', 'with', 'wrong', 'words', 'hello', 'this', 'is', 'a', 'post'];
-// console.log('hi')
-$('textarea').hide().before('<div id="foo" class="blah" contenteditable="true"/>');
-$('.blah').html($('textarea').val()).keypress(function(e){
-	var key = e.which;
-	// console.log(key)
-	// if (key == 32 || key == 13) {
+// // console.log('hi')
+// $('textarea').hide().before('<div id="foo" class="blah" contenteditable="true"/>');
+// $('.blah').html($('textarea').val()).keypress(function(e){
+// 	var key = e.which;
+// 	// console.log(key)
+// 	// if (key == 32 || key == 13) {
 
-    	$('textarea').val(jQuery(this).text()); //take the plain text, not the span
-	    var words = $(this).text().split(' ');
-	    for (var i = 0; i < words.length; i++)
-	    {
-	    	response = runPyScript(words[i]);
-	    	console.log(response)
-	        if(response == -1) // your function here to test for correct spelling
-	        {
-	            words[i] = '<span class="jquery-spelling-incorrect">' + words[i] + '</span>';
-	        }
-	    }
-	    $(this).html(words.join(' '));
-	    elem = document.getElementById('foo');//This is the element that you want to move the caret to the end of
-		setEndOfContenteditable(elem);
+//     	$('textarea').val(jQuery(this).text()); //take the plain text, not the span
+// 	    var words = $(this).text().split(' ');
+// 	    for (var i = 0; i < words.length; i++)
+// 	    {
+// 	    	response = runPyScript(words[i]);
+// 	    	console.log(response)
+// 	        if(response == -1) // your function here to test for correct spelling
+// 	        {
+// 	            words[i] = '<span class="jquery-spelling-incorrect">' + words[i] + '</span>';
+// 	        }
+// 	    }
+// 	    $(this).html(words.join(' '));
+// 	    elem = document.getElementById('foo');//This is the element that you want to move the caret to the end of
+// 		setEndOfContenteditable(elem);
 
-	// }
-});
+// 	// }
+// });
 
 // var dvHTML = 'AAAA <span style="text-decoration: underline;">Hello world</span> BBBB';
 
@@ -112,239 +112,239 @@ $('.blah').html($('textarea').val()).keypress(function(e){
         <!-- The javascript xontaining the plugin and the code to init the plugin -->
 <script type="text/javascript">
 
-	// function runPyScript(input){
-	//     var jqXHR = $.ajax({
-	//         type: "POST",
-	//         // url: "http://natashavasthare.pythonanywhere.com/",
- //            url: "http://127.0.0.1:5000/",
-	//         async: false,
-	//         data: {params : input},
-	//         datatype: "text",
-	//         success: function(result){
- //        	console.log(result);
-	// 	    },
-	// 	    error: function(){
-	// 	        console.log('error');
-	// 	    }   
-	//     });
-	//     return jqXHR.responseText;
-	// }
+	function runPyScript(input){
+	    var jqXHR = $.ajax({
+	        type: "POST",
+	        // url: "http://natashavasthare.pythonanywhere.com/",
+            url: "http://127.0.0.1:5000/",
+	        async: false,
+	        data: {params : input},
+	        datatype: "text",
+	        success: function(result){
+        	console.log(result);
+		    },
+		    error: function(){
+		        console.log('error');
+		    }   
+	    });
+	    return jqXHR.responseText;
+	}
 
 
- //            $(function() {
- //                // let's init the plugin, that we called "highlight".
- //                // We will highlight the words "hello" and "world", 
- //                // and set the input area to a widht and height of 500 and 250 respectively.
+            $(function() {
+                // let's init the plugin, that we called "highlight".
+                // We will highlight the words "hello" and "world", 
+                // and set the input area to a widht and height of 500 and 250 respectively.
 
- //                $("#container").highlight({
- //                    words:  ["hello","world"],
- //                    width:  500,
- //                    height: 250
- //                });
- //            });
+                $("#container").highlight({
+                    words:  ["hello","world"],
+                    width:  500,
+                    height: 250
+                });
+            });
 
- //            // the plugin that would do the trick
- //            (function($){
- //                $.fn.extend({
- //                    highlight: function() {
- //                        // the main class
- //                        var pluginClass = function() {};
- //                        // init the class
- //                        // Bootloader
- //                        pluginClass.prototype.__init = function (element) {
- //                            try {
- //                                this.element = element;
- //                            } catch (err) {
- //                                this.error(err);
- //                            }
- //                        };
- //                        // centralized error handler
- //                        pluginClass.prototype.error = function (e) {
- //                            // manage error and exceptions here
- //                            //console.info("error!",e);
- //                        };
- //                        // Centralized routing function
- //                        pluginClass.prototype.execute = function (fn, options) {
- //                            try {
- //                                options = $.extend({},options);
- //                                if (typeof(this[fn]) == "function") {
- //                                    var output = this[fn].apply(this, [options]);
- //                                } else {
- //                                    this.error("undefined_function");
- //                                }
- //                            } catch (err) {
- //                                this.error(err);
- //                            }
- //                        };
- //                        // **********************
- //                        // Plugin Class starts here
- //                        // **********************
- //                        // init the component
- //                        pluginClass.prototype.init = function (options) {
- //                            try {
- //                                // the element's reference ( $("#container") ) is stored into "this.element"
- //                                var scope                   = this;
- //                                this.options                = options;
+            // the plugin that would do the trick
+            (function($){
+                $.fn.extend({
+                    highlight: function() {
+                        // the main class
+                        var pluginClass = function() {};
+                        // init the class
+                        // Bootloader
+                        pluginClass.prototype.__init = function (element) {
+                            try {
+                                this.element = element;
+                            } catch (err) {
+                                this.error(err);
+                            }
+                        };
+                        // centralized error handler
+                        pluginClass.prototype.error = function (e) {
+                            // manage error and exceptions here
+                            //console.info("error!",e);
+                        };
+                        // Centralized routing function
+                        pluginClass.prototype.execute = function (fn, options) {
+                            try {
+                                options = $.extend({},options);
+                                if (typeof(this[fn]) == "function") {
+                                    var output = this[fn].apply(this, [options]);
+                                } else {
+                                    this.error("undefined_function");
+                                }
+                            } catch (err) {
+                                this.error(err);
+                            }
+                        };
+                        // **********************
+                        // Plugin Class starts here
+                        // **********************
+                        // init the component
+                        pluginClass.prototype.init = function (options) {
+                            try {
+                                // the element's reference ( $("#container") ) is stored into "this.element"
+                                var scope                   = this;
+                                this.options                = options;
 
- //                                // just find the different elements we'll need
- //                                this.highlighterContainer   = this.element.find('#highlighterContainer');
- //                                this.inputContainer         = this.element.find('#inputContainer');
- //                                this.textarea               = this.inputContainer.find('textarea');
- //                                this.highlighter            = this.highlighterContainer.find('#highlighter');
+                                // just find the different elements we'll need
+                                this.highlighterContainer   = this.element.find('#highlighterContainer');
+                                this.inputContainer         = this.element.find('#inputContainer');
+                                this.textarea               = this.inputContainer.find('textarea');
+                                this.highlighter            = this.highlighterContainer.find('#highlighter');
 
- //                                // apply the css
- //                                this.element.css('position','relative');
+                                // apply the css
+                                this.element.css('position','relative');
 
- //                                // place both the highlight container and the textarea container
- //                                // on the same coordonate to superpose them.
- //                                this.highlighterContainer.css({
- //                                    'position':         'absolute',
- //                                    'left':             '0',
- //                                    'top':              '0',
- //                                    'border':           '1px dashed #000000',
- //                                    'width':            this.options.width,
- //                                    'height':           this.options.height,
- //                                    'cursor':           'text'
- //                                });
- //                                this.inputContainer.css({
- //                                    'position':         'absolute',
- //                                    'left':             '0',
- //                                    'top':              '0',
- //                                    'border':           '1px solid #000000'
- //                                });
- //                                // now let's make sure the highlit div and the textarea will superpose,
- //                                // by applying the same font size and stuffs.
- //                                // the highlighter must have a white text so it will be invisible
- //                                this.highlighter.css({
+                                // place both the highlight container and the textarea container
+                                // on the same coordonate to superpose them.
+                                this.highlighterContainer.css({
+                                    'position':         'absolute',
+                                    'left':             '0',
+                                    'top':              '0',
+                                    'border':           '1px dashed #000000',
+                                    'width':            this.options.width,
+                                    'height':           this.options.height,
+                                    'cursor':           'text'
+                                });
+                                this.inputContainer.css({
+                                    'position':         'absolute',
+                                    'left':             '0',
+                                    'top':              '0',
+                                    'border':           '1px solid #000000'
+                                });
+                                // now let's make sure the highlit div and the textarea will superpose,
+                                // by applying the same font size and stuffs.
+                                // the highlighter must have a white text so it will be invisible
+                                this.highlighter.css({
 
- //                                    'padding':          '7px',
- //                                    'color':            '#ffffff',
- //                                    'background-color': '#ffffff',
- //                                    'margin':           '0px',
- //                                    'font-size':        '11px',
- //                                    'font-family':      '"lucida grande",tahoma,verdana,arial,sans-serif'
- //                                });
- //                                // the textarea must have a transparent background so we can see the highlight div behind it
- //                                this.textarea.css({
- //                                    'background-color': 'transparent',
- //                                    'padding':          '5px',
- //                                    'margin':           '0px',
- //                                    'font-size':        '11px',
- //                                    'width':            this.options.width,
- //                                    'height':           this.options.height,
- //                                    'font-family':      '"lucida grande",tahoma,verdana,arial,sans-serif'
- //                                });
+                                    'padding':          '7px',
+                                    'color':            '#ffffff',
+                                    'background-color': '#ffffff',
+                                    'margin':           '0px',
+                                    'font-size':        '11px',
+                                    'font-family':      '"lucida grande",tahoma,verdana,arial,sans-serif'
+                                });
+                                // the textarea must have a transparent background so we can see the highlight div behind it
+                                this.textarea.css({
+                                    'background-color': 'transparent',
+                                    'padding':          '5px',
+                                    'margin':           '0px',
+                                    'font-size':        '11px',
+                                    'width':            this.options.width,
+                                    'height':           this.options.height,
+                                    'font-family':      '"lucida grande",tahoma,verdana,arial,sans-serif'
+                                });
 
- //                                // apply the hooks
- //                                this.highlighterContainer.bind('click', function() {
- //                                    scope.textarea.focus();
- //                                });
- //                                this.textarea.bind('keyup', function() {
- //                                    // when we type in the textarea, 
- //                                    // we want the text to be processed and re-injected into the div behind it.
- //                                    // var key = e.which;
- //                                    // if (key == 32) {
- //                                    	scope.applyText($(this).val());
- //                                    // }
- //                                });
- //                            } catch (err) {
- //                                this.error(err);
- //                            }
- //                            return true;
- //                        };
- //                        pluginClass.prototype.applyText = function (text) {
- //                            try {
- //                                var scope                   = this;
+                                // apply the hooks
+                                this.highlighterContainer.bind('click', function() {
+                                    scope.textarea.focus();
+                                });
+                                this.textarea.bind('keyup', function() {
+                                    // when we type in the textarea, 
+                                    // we want the text to be processed and re-injected into the div behind it.
+                                    // var key = e.which;
+                                    // if (key == 32) {
+                                    	scope.applyText($(this).val());
+                                    // }
+                                });
+                            } catch (err) {
+                                this.error(err);
+                            }
+                            return true;
+                        };
+                        pluginClass.prototype.applyText = function (text) {
+                            try {
+                                var scope                   = this;
 
- //                                // parse the text:
- //                                // replace all the line braks by <br/>, and all the double spaces by the html version &nbsp;
- //                                // text = this.replaceAll(text,'\n','<br/>');
- //                                // text = this.replaceAll(text,'  ','&nbsp;&nbsp;');
- //                                // text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
- //                                text = ' ' + text
- //                                var words = text.split(' ');
- //                                // console.log(words);
- //                                // console.log(text);
- //                                // replace the words by a highlighted version of the words
- //                                for (var i=0;i<words.length - 1;i++) {
- //                                	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
- //                                	// text = this.replaceAll(text,'</span>','')
- //                                	// console.log(text);
- //                                	// console.log(words);
- //                                	// console.log(words[i]);
- //                                	if (words[i] != "" && words[i] != '\n' && words[i] != 'span' && words[i] != 'style' 
- //                                		&& words[i] != 'background-color:' && words[i] != '<' && words[i] != '/' 
- //                                		&& words[i] != ':' && words[i] != '"' && words[i] != '>') {
- //                                		response = runPyScript(words[i]);
-	// 						    		// console.log(response)
+                                // parse the text:
+                                // replace all the line braks by <br/>, and all the double spaces by the html version &nbsp;
+                                // text = this.replaceAll(text,'\n','<br/>');
+                                // text = this.replaceAll(text,'  ','&nbsp;&nbsp;');
+                                // text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
+                                text = ' ' + text
+                                var words = text.split(' ');
+                                // console.log(words);
+                                // console.log(text);
+                                // replace the words by a highlighted version of the words
+                                for (var i=0;i<words.length - 1;i++) {
+                                	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
+                                	// text = this.replaceAll(text,'</span>','')
+                                	// console.log(text);
+                                	// console.log(words);
+                                	// console.log(words[i]);
+                                	if (words[i] != "" && words[i] != '\n' && words[i] != 'span' && words[i] != 'style' 
+                                		&& words[i] != 'background-color:' && words[i] != '<' && words[i] != '/' 
+                                		&& words[i] != ':' && words[i] != '"' && words[i] != '>') {
+                                		response = runPyScript(words[i]);
+							    		// console.log(response)
 							    	
-	// 							        if(response == -1) // your function here to test for correct spelling
-	// 							        {
- //                                			// console.log('before' + text);
-	// 							        	// words[i] = words[i]
-	//                                     	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">'+words[i] + '</span>',words[i]);
-	//                                     	text = this.replaceAll(text,' '+ words[i] +' ' ,' '+ '<span style="background-color: #ffb3b3;">' + words[i] +'</span>' +' ');
- //                                			// console.log('after' + text);
+								        if(response == -1) // your function here to test for correct spelling
+								        {
+                                			// console.log('before' + text);
+								        	// words[i] = words[i]
+	                                    	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">'+words[i] + '</span>',words[i]);
+	                                    	text = this.replaceAll(text,' '+ words[i] +' ' ,' '+ '<span style="background-color: #ffb3b3;">' + words[i] +'</span>' +' ');
+                                			// console.log('after' + text);
 	                                   	
-	//                                     }
-	//                                 }
- //                                    if (words[i][words[i].length - 1] == "." && i == words.length - 2) {
- //                                        console.log("here: " + words[i])
- //                                        console.log(i)
- //                                        var text2 = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','');
- //                                        text2 = this.replaceAll(text2,'</span>','');
- //                                        runPyScript(text2);
+	                                    }
+	                                }
+                                    if (words[i][words[i].length - 1] == "." && i == words.length - 2) {
+                                        console.log("here: " + words[i])
+                                        console.log(i)
+                                        var text2 = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','');
+                                        text2 = this.replaceAll(text2,'</span>','');
+                                        runPyScript(text2);
 
- //                                    } 
- //                                }
+                                    } 
+                                }
 
- //                                // re-inject the processed text into the div
- //                                this.highlighter.html(text);
+                                // re-inject the processed text into the div
+                                this.highlighter.html(text);
 
- //                            } catch (err) {
- //                                this.error(err);
- //                            }
- //                            return true;
- //                        };
- //                        // "replace all" function
- //                        pluginClass.prototype.replaceAll = function(txt, replace, with_this) {
- //                        	// console.log(txt);
- //                        	// console.log(replace);
- //                            return txt.replace(new RegExp(replace, 'g'),with_this);
- //                        }
+                            } catch (err) {
+                                this.error(err);
+                            }
+                            return true;
+                        };
+                        // "replace all" function
+                        pluginClass.prototype.replaceAll = function(txt, replace, with_this) {
+                        	// console.log(txt);
+                        	// console.log(replace);
+                            return txt.replace(new RegExp(replace, 'g'),with_this);
+                        }
 
- //                        // don't worry about this part, it's just the required code for the plugin to hadle the methods and stuffs. Not relevant here.
- //                        //**********************
- //                        // process
- //                        var fn;
- //                        var options;
- //                        if (arguments.length == 0) {
- //                            fn = "init";
- //                            options = {};
- //                        } else if (arguments.length == 1 && typeof(arguments[0]) == 'object') {
- //                            fn = "init";
- //                            options = $.extend({},arguments[0]);
- //                        } else {
- //                            fn = arguments[0];
- //                            options = $.extend({},arguments[1]);
- //                        }
+                        // don't worry about this part, it's just the required code for the plugin to hadle the methods and stuffs. Not relevant here.
+                        //**********************
+                        // process
+                        var fn;
+                        var options;
+                        if (arguments.length == 0) {
+                            fn = "init";
+                            options = {};
+                        } else if (arguments.length == 1 && typeof(arguments[0]) == 'object') {
+                            fn = "init";
+                            options = $.extend({},arguments[0]);
+                        } else {
+                            fn = arguments[0];
+                            options = $.extend({},arguments[1]);
+                        }
 
- //                        $.each(this, function(idx, item) {
- //                            // if the component is not yet existing, create it.
- //                            if ($(item).data('highlightPlugin') == null) {
- //                                $(item).data('highlightPlugin', new pluginClass());
- //                                $(item).data('highlightPlugin').__init($(item));
- //                            }
- //                            $(item).data('highlightPlugin').execute(fn, options);
- //                        });
- //                        return this;
- //                    }
- //                });
+                        $.each(this, function(idx, item) {
+                            // if the component is not yet existing, create it.
+                            if ($(item).data('highlightPlugin') == null) {
+                                $(item).data('highlightPlugin', new pluginClass());
+                                $(item).data('highlightPlugin').__init($(item));
+                            }
+                            $(item).data('highlightPlugin').execute(fn, options);
+                        });
+                        return this;
+                    }
+                });
 
- //            })(jQuery);
+            })(jQuery);
 </script>
 </head>
-    <!-- <body>
+    <body>
 
         <div id="container">
             <div id="highlighterContainer">
@@ -359,7 +359,7 @@ $('.blah').html($('textarea').val()).keypress(function(e){
             </div>
         </div>
 
-    </body>    -->    
+    </body>       
 <br>
 <br>
 <br>
