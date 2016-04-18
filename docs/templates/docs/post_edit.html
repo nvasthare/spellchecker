@@ -121,7 +121,7 @@ function myFunction() {
 	        data: {params : input},
 	        datatype: "text",
 	        success: function(result){
-        	console.log(result);
+        	// console.log(result);
 		    },
 		    error: function(){
 		        console.log('error');
@@ -288,12 +288,13 @@ function myFunction() {
 	                                   	
 	                                    }
 	                                }
-                                    if (words[i][words[i].length - 1] == "." && i == words.length - 2) {
+                                    if (words[i][words[i].length - 1] == ".") {
                                         console.log("here: " + words[i])
                                         console.log(i)
                                         var text2 = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','');
                                         text2 = this.replaceAll(text2,'</span>','');
                                         runPyScript(text2);
+                                        console.log(text2);
 
                                     } 
                                 }

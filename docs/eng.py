@@ -75,17 +75,17 @@ def doTest(word):
     global trigrams
     global dictionary
     # print "do test"
+    word = word.strip(',')
+    word = word.strip('?')
+    word = word.strip('!')
+    word = word.strip(';')
+    word = word.strip('.')
     if word in dictionary:
     	print word, "in dict"
     	return 0
     if word in string.punctuation:
     	print "in punc"
     	return 0
-    word = word.strip(',')
-    word = word.strip('?')
-    word = word.strip('!')
-    word = word.strip(';')
-    word = word.strip('.')
     print word
     s = Set()
     i = 0
@@ -138,9 +138,12 @@ def main():
         print "reset"
         doReset()
         return str(0)
-    if len(word.split()) > 1:
+    word = word.strip()
+    if len(word.split()) > 1 and word[len(word)-1] == '.':
     	print "to add to dict"
     	addToDict(word)
+    	return str(0)
+    elif len(word.split()) > 1:
     	return str(0)
     word = word.lower()
     # print word
