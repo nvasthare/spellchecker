@@ -9,13 +9,34 @@ def post_list(request):
 	langs = [int(i) for i in langs]
 	return render(request,'docs/post_list.html', {'langs': langs})
 
-def post_edit(request,l):
+def post_edit(request,l, words):
 	form = PostForm()
 	print l
-	if l == '0':
-		return render(request, 'docs/post_edit.html', {'form': form})
+	print words
+	if words == '0':
+		if l == '0':
+			return render(request, 'docs/post_edit.html', {'form': form})
+		elif l == '1':
+			return render(request,'docs/post_edit1.html', {'form': form})
+		elif l == '2':
+			return render(request,'docs/post_edit2.html', {'form': form})
+		elif l == '3':
+			return render(request,'docs/post_edit3.html', {'form': form})
+		elif l == '4':
+			return render(request,'docs/post_edit4.html', {'form': form})
+	elif words == '1':
+		if l == '0':
+			return render(request, 'docs/post_edit00.html', {'form': form})
+		elif l == '1':
+			return render(request,'docs/post_edit01.html', {'form': form})
+		elif l == '2':
+			return render(request,'docs/post_edit02.html', {'form': form})
+		elif l == '3':
+			return render(request,'docs/post_edit03.html', {'form': form})
+		elif l == '4':
+			return render(request,'docs/post_edit04.html', {'form': form})
 	else:
-		return render(request,'docs/post_edit.html', {'form':form})
+		return render(request, 'docs/post_edit.html', {'form': form})
     # post = get_object_or_404(Post, pk=pk)
     # if request.method == "POST":
     #     form = PostForm(request.POST, instance=post)

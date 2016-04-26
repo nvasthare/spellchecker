@@ -11,16 +11,51 @@ a {color:black;}
 {% for lang in langs %}
     <div class="post">
         {% if lang == 0 %}
-            <li><a href="{% url 'post_edit' l=lang%}">{{ 'English' }}</a></li>
+            <li><a href="{% url 'post_edit' l=lang words=0%}">{{ 'English' }}</a></li>
         {% elif lang == 1 %}
-            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Spanish' }}</a></li>
+            <li><a href="{% url 'post_edit' l=lang words=0%}">{{ 'Spanish' }}</a></li>
         {% elif lang == 2 %}
-            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Vietnamese' }}</li></p>
+            <li><a href="{% url 'post_edit' l=lang words=0%}">{{ 'Vietnamese' }}</li>
         {% elif lang == 3 %}
-            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Hindi' }}</li></p>
+            <li><a href="{% url 'post_edit' l=lang words=0%}">{{ 'Hindi' }}</li>
         {% elif lang == 4 %}
-            <li><a href="{% url 'post_edit' l=lang%}">{{ 'Farsi' }}</li></p>
+            <li><a href="{% url 'post_edit' l=lang words=0%}">{{ 'Farsi' }}</li>
         {% endif %}
     </div>
 {% endfor %}
 {% endblock %}
+
+
+<!-- <button onclick="myFunction()">Reset</button>
+<p id="reset"></p>
+
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script>
+<script type="text/javascript">
+
+function runPyScript(input,lang){
+        var jqXHR = $.ajax({
+            type: "POST",
+            // url: "http://natashavasthare.pythonanywhere.com/",
+            url: "http://127.0.0.1:5000/",
+            async: false,
+            data: {params : input, l : lang},
+            datatype: "text",
+            success: function(result){
+            console.log(result);
+            },
+            error: function(){
+                console.log('error');
+            }   
+        });
+        return jqXHR.responseText;
+    }
+
+function myFunction() {
+    console.log("reset")
+    runPyScript("**reset**",'eng');
+    // $(this).val('');
+}
+
+</script> -->

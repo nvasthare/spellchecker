@@ -7,17 +7,15 @@
         <!-- <button type="submit" class="save btn btn-default">Save</button> -->
     <!-- </form> -->
    <!--  <div id="foo">
-	</div> -->
+    </div> -->
 
 <button onclick="myFunction()">Reset</button>
 <p id="reset"></p>
 
 <p> Currently trained with 1000 words. </p>
 
-<p><a href="{% url 'post_edit' l=0 words=1 %}">{{ 'Train with 100 words? Click here.' }}</a></p>
+<p><a href="{% url 'post_edit' l=3 words=1 %}">{{ 'Train with 100 words? Click here.' }}</a></p>
 
-<!-- <button onclick="exReplace()">this is a sentence</button>
-<p id="ex1"></p> -->
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script>
 <script type="text/javascript">
@@ -25,8 +23,8 @@
 function runPyScript(input,lang){
         var jqXHR = $.ajax({
             type: "POST",
-            // url: "http://natashavasthare.pythonanywhere.com/",
-            url: "http://127.0.0.1:5000/",
+            url: "http://natashavasthare.pythonanywhere.com/",
+            // url: "http://127.0.0.1:5000/",
             async: false,
             data: {params : input, l : lang, w : '1000'},
             datatype: "text",
@@ -42,11 +40,9 @@ function runPyScript(input,lang){
 
 function myFunction() {
     console.log("reset")
-    runPyScript("**reset**",'eng');
+    runPyScript("**reset**",'hin');
     // $(this).val('');
 }
-
-
 
 
 
@@ -56,7 +52,7 @@ function myFunction() {
 //     var range,selection;
 //     if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
 //     {
-//     	// console.log('if')
+//      // console.log('if')
 //         range = document.createRange();//Create a range (a range is a like the selection but invisible)
 //         range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
 //         range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
@@ -71,26 +67,26 @@ function myFunction() {
 // // console.log('hi')
 // $('textarea').hide().before('<div id="foo" class="blah" contenteditable="true"/>');
 // $('.blah').html($('textarea').val()).keypress(function(e){
-// 	var key = e.which;
-// 	// console.log(key)
-// 	// if (key == 32 || key == 13) {
+//  var key = e.which;
+//  // console.log(key)
+//  // if (key == 32 || key == 13) {
 
-//     	$('textarea').val(jQuery(this).text()); //take the plain text, not the span
-// 	    var words = $(this).text().split(' ');
-// 	    for (var i = 0; i < words.length; i++)
-// 	    {
-// 	    	response = runPyScript(words[i]);
-// 	    	console.log(response)
-// 	        if(response == -1) // your function here to test for correct spelling
-// 	        {
-// 	            words[i] = '<span class="jquery-spelling-incorrect">' + words[i] + '</span>';
-// 	        }
-// 	    }
-// 	    $(this).html(words.join(' '));
-// 	    elem = document.getElementById('foo');//This is the element that you want to move the caret to the end of
-// 		setEndOfContenteditable(elem);
+//      $('textarea').val(jQuery(this).text()); //take the plain text, not the span
+//      var words = $(this).text().split(' ');
+//      for (var i = 0; i < words.length; i++)
+//      {
+//          response = runPyScript(words[i]);
+//          console.log(response)
+//          if(response == -1) // your function here to test for correct spelling
+//          {
+//              words[i] = '<span class="jquery-spelling-incorrect">' + words[i] + '</span>';
+//          }
+//      }
+//      $(this).html(words.join(' '));
+//      elem = document.getElementById('foo');//This is the element that you want to move the caret to the end of
+//      setEndOfContenteditable(elem);
 
-// 	// }
+//  // }
 // });
 
 // var dvHTML = 'AAAA <span style="text-decoration: underline;">Hello world</span> BBBB';
@@ -99,19 +95,19 @@ function myFunction() {
 //     this.contentEditable = true;                
 // });
 
-	
-	
+    
+    
 
   //   $(document).ready(function(){
-  //   	$(this).keypress(function (e) {
-  //   		var key = e.which;
-  //   		if (key == 32) {
-  //   			// $(this).css('color', 'red');
-  //   			value = $(this).val();
-  //   			response = runPyScript(value);
-  //   			console.log(response);
-  //   		}
-		// });
+  //    $(this).keypress(function (e) {
+  //        var key = e.which;
+  //        if (key == 32) {
+  //            // $(this).css('color', 'red');
+  //            value = $(this).val();
+  //            response = runPyScript(value);
+  //            console.log(response);
+  //        }
+        // });
   //   });
 
 </script>
@@ -120,23 +116,23 @@ function myFunction() {
         <!-- The javascript xontaining the plugin and the code to init the plugin -->
 <script type="text/javascript">
 
-	function runPyScript(input,lang){
-	    var jqXHR = $.ajax({
-	        type: "POST",
-	        // url: "http://natashavasthare.pythonanywhere.com/",
-            url: "http://127.0.0.1:5000/",
-	        async: false,
-	        data: {params : input, l : lang,w : '1000'},
-	        datatype: "text",
-	        success: function(result){
-        	// console.log(result);
-		    },
-		    error: function(){
-		        console.log('error');
-		    }   
-	    });
-	    return jqXHR.responseText;
-	}
+    function runPyScript(input,lang){
+        var jqXHR = $.ajax({
+            type: "POST",
+            url: "http://natashavasthare.pythonanywhere.com/",
+            // url: "http://127.0.0.1:5000/",
+            async: false,
+            data: {params : input, l : lang, w : '1000'},
+            datatype: "text",
+            success: function(result){
+            // console.log(result);
+            },
+            error: function(){
+                console.log('error');
+            }   
+        });
+        return jqXHR.responseText;
+    }
 
 
             $(function() {
@@ -252,7 +248,7 @@ function myFunction() {
                                     // we want the text to be processed and re-injected into the div behind it.
                                     // var key = e.which;
                                     // if (key == 32) {
-                                    	scope.applyText($(this).val());
+                                        scope.applyText($(this).val());
                                     // }
                                 });
                             } catch (err) {
@@ -275,33 +271,33 @@ function myFunction() {
                                 // console.log(text);
                                 // replace the words by a highlighted version of the words
                                 for (var i=0;i<words.length - 1;i++) {
-                                	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
-                                	// text = this.replaceAll(text,'</span>','')
-                                	// console.log(text);
-                                	// console.log(words);
-                                	// console.log(words[i]);
-                                	if (words[i] != "" && words[i] != '\n' && words[i] != 'span' && words[i] != 'style' 
-                                		&& words[i] != 'background-color:' && words[i] != '<' && words[i] != '/' 
-                                		&& words[i] != ':' && words[i] != '"' && words[i] != '>') {
-                                		response = runPyScript(words[i],'eng');
-							    		// console.log(response)
-							    	
-								        if(response == -1) // your function here to test for correct spelling
-								        {
-                                			// console.log('before' + text);
-								        	// words[i] = words[i]
-	                                    	// text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">'+words[i] + '</span>',words[i]);
-	                                    	text = this.replaceAll(text,' '+ words[i] +' ' ,' '+ '<span style="background-color: #ffb3b3;">' + words[i] +'</span>' +' ');
-                                			// console.log('after' + text);
-	                                   	
-	                                    }
-	                                }
+                                    // text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','')
+                                    // text = this.replaceAll(text,'</span>','')
+                                    // console.log(text);
+                                    // console.log(words);
+                                    // console.log(words[i]);
+                                    if (words[i] != "" && words[i] != '\n' && words[i] != 'span' && words[i] != 'style' 
+                                        && words[i] != 'background-color:' && words[i] != '<' && words[i] != '/' 
+                                        && words[i] != ':' && words[i] != '"' && words[i] != '>') {
+                                        response = runPyScript(words[i],'hin');
+                                        // console.log(response)
+                                    
+                                        if(response == -1) // your function here to test for correct spelling
+                                        {
+                                            // console.log('before' + text);
+                                            // words[i] = words[i]
+                                            // text = this.replaceAll(text,'<span style="background-color: #ffb3b3;">'+words[i] + '</span>',words[i]);
+                                            text = this.replaceAll(text,' '+ words[i] +' ' ,' '+ '<span style="background-color: #ffb3b3;">' + words[i] +'</span>' +' ');
+                                            // console.log('after' + text);
+                                        
+                                        }
+                                    }
                                     if (words[i][words[i].length - 1] == ".") {
                                         console.log("here: " + words[i])
                                         console.log(i)
                                         var text2 = this.replaceAll(text,'<span style="background-color: #ffb3b3;">','');
                                         text2 = this.replaceAll(text2,'</span>','');
-                                        runPyScript(text2,'eng');
+                                        runPyScript(text2,'hin');
                                         console.log(text2);
 
                                     } 
@@ -317,8 +313,8 @@ function myFunction() {
                         };
                         // "replace all" function
                         pluginClass.prototype.replaceAll = function(txt, replace, with_this) {
-                        	// console.log(txt);
-                        	// console.log(replace);
+                            // console.log(txt);
+                            // console.log(replace);
                             return txt.replace(new RegExp(replace, 'g'),with_this);
                         }
 
@@ -351,12 +347,6 @@ function myFunction() {
                 });
 
             })(jQuery);
-
-            // function exReplace() {
-            //     var scope = this;
-            //     console.log("exreplace");
-            //     console.log($(this).val());
-            // }
 </script>
 </head>
     <body>
@@ -390,10 +380,8 @@ function myFunction() {
 <br>
 
 <h4> Some example sentences to type: </h4>
-<p> this is a sentence </p>
-<p> this is a snetnce </p>
-
-
+<p> वह यह पाया (She found it.) </p>
+<p> This is a snetnce. </p>
 
 <!-- <input type="textarea" id="textarea"  /> -->
 

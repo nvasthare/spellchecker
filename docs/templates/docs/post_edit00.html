@@ -12,9 +12,8 @@
 <button onclick="myFunction()">Reset</button>
 <p id="reset"></p>
 
-<p> Currently trained with 1000 words. </p>
-
-<p><a href="{% url 'post_edit' l=0 words=1 %}">{{ 'Train with 100 words? Click here.' }}</a></p>
+<p> Currently trained with 100 words. </p>
+<p><a href="{% url 'post_edit' l=0 words=0 %}">{{ 'Train with 1000 words? Click here.' }}</a></p>
 
 <!-- <button onclick="exReplace()">this is a sentence</button>
 <p id="ex1"></p> -->
@@ -28,7 +27,7 @@ function runPyScript(input,lang){
             // url: "http://natashavasthare.pythonanywhere.com/",
             url: "http://127.0.0.1:5000/",
             async: false,
-            data: {params : input, l : lang, w : '1000'},
+            data: {params : input, l : lang,w : '100'},
             datatype: "text",
             success: function(result){
             console.log(result);
@@ -126,7 +125,7 @@ function myFunction() {
 	        // url: "http://natashavasthare.pythonanywhere.com/",
             url: "http://127.0.0.1:5000/",
 	        async: false,
-	        data: {params : input, l : lang,w : '1000'},
+	        data: {params : input, l : lang,w : '100'},
 	        datatype: "text",
 	        success: function(result){
         	// console.log(result);
