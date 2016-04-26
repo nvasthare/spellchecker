@@ -54,6 +54,8 @@ def getWords(filename):
     for line in f2:
         line = line.strip()
         line = line.split()
+        if len(line) == 0:
+        	continue
         word = line[0]
         word = word.lower()
         # print word.strip()
