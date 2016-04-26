@@ -96,30 +96,30 @@ def doTest(word):
     word = word.strip(';')
     word = word.strip('.')
     if word in dictionary:
-    	print word, "in dict"
+    	# print word, "in dict"
     	return 0
     if word in string.punctuation:
-    	print "in punc"
+    	# print "in punc"
     	return 0
-    print word
+    # print word
     s = Set()
     i = 0
     tri = getTrigrams(set([word]))
     # print tri
     minTri,mtri = test(trigrams,tri)
-    print minTri,mtri
+    # print minTri,mtri
     size = getSize(trigrams)
-    print 'size', size
+    # print 'size', size
     perc = minTri/size * scale
-    print perc,threshAdd,threshRes
+    # print perc,threshAdd,threshRes
     if perc > threshAdd:
-    	print 'add'
+    	# print 'add'
     	trigrams = getTrigrams(set([word]),trigrams)
     if (perc > threshRes):
-    	print 'return 0'
+    	# print 'return 0'
         return 0
     else:
-    	print 'return -1'
+    	# print 'return -1'
         # trigrams = getTrigrams(set([word]),trigrams)
         return -1
        
@@ -131,10 +131,10 @@ def addToDict(sentence):
 		word = word.strip('.')
 		word = word.lower()
 		if word not in dictionary:
-			print word, "add to dict"
+			# print word, "add to dict"
 			trigrams = getTrigrams(set([word]),trigrams)
 			dictionary.add(word)
-		print word, "already in dict"
+		# print word, "already in dict"
 
 def doReset():
 	global trigrams
@@ -144,7 +144,7 @@ def doReset():
 	trigrams = getTrigrams(train)
 	dictionary = Set()
 	for word in words:
-		print "add to dict"
+		# print "add to dict"
 		dictionary.add(word.lower())
 
 @app.route("/",methods=["GET","POST"])
@@ -157,16 +157,16 @@ def main():
 	global dictionary
 	word = request.form['params']
 	if word == "**reset**":
-	    print "reset"
+	    # print "reset"
 	    doReset()
 	    return str(0)
 	lang = request.form['l']
-	print lang
-	print word
+	# print lang
+	# print word
 	word = word.strip()
 	# print repr(word)
 	numWords = request.form['w']
-	print numWords
+	# print numWords
 	if numWords == '1000':
 		if lang == 'eng':
 			words = getWords('engtrain.txt')
@@ -177,7 +177,7 @@ def main():
 				dictionary.add(w.lower())
 
 		elif lang == 'esp':
-			print 'spanish'
+			# print 'spanish'
 			# print repr(words[25])
 			words = getWords('esptrain.txt')
 			words = [w.decode('utf-8') for w in words]
@@ -228,7 +228,7 @@ def main():
 				dictionary.add(w.lower())
 
 		elif lang == 'esp':
-			print 'spanish'
+			# print 'spanish'
 			words = getWords('esptrain.txt')
 			# print repr(words[25])
 			words = [w.decode('utf-8') for w in words]
@@ -271,7 +271,7 @@ def main():
 
 	word = word.strip()
 	if len(word.split()) > 1 and word[len(word)-1] == '.':
-		print "to add to dict"
+		# print "to add to dict"
 		addToDict(word)
 		return str(0)
 	elif len(word.split()) > 1:
@@ -279,18 +279,18 @@ def main():
 	word = word.lower()
 	# print word
 	result = doTest(word)
-	print result
+	# print result
 	return str(result)
 
 @app.after_request
 def add_headers(response):
-    print "headers"
+    # print "headers"
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     return response
 
 if __name__ == "__main__":
-    print "run"
+    # print "run"
     app.run()
 
 
