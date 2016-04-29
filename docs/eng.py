@@ -49,9 +49,9 @@ def getTrigrams(words,trigrams = 0):
 def getWords(filename):
     l = []
     mydir = os.path.dirname(__file__)
-    print mydir
+    # print mydir
     filepath = os.path.join(mydir,filename)
-    print filepath
+    # print filepath
     f2 = open(filepath)
     for line in f2:
         line = line.strip()
@@ -109,11 +109,11 @@ def doTest(word):
     tri = getTrigrams(set([word]))
     # print tri
     minTri,mtri = test(trigrams,tri)
-    print minTri,mtri
+    # print minTri,mtri
     size = getSize(trigrams)
     # print 'size', size
     perc = minTri/size * scale
-    print perc
+    # print perc
     if perc > threshAdd:
     	# print 'add'
     	trigrams = getTrigrams(set([word]),trigrams)
