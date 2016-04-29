@@ -12,6 +12,8 @@ scale = 100 * 1000
 
 words = []
 dictionary = Set()
+prevLang = ''
+prevWords = ''
 
 # lang = request.form['l']
 # # if lang == 'eng':
@@ -107,11 +109,11 @@ def doTest(word):
     tri = getTrigrams(set([word]))
     # print tri
     minTri,mtri = test(trigrams,tri)
-    # print minTri,mtri
+    print minTri,mtri
     size = getSize(trigrams)
     # print 'size', size
     perc = minTri/size * scale
-    # print perc,threshAdd,threshRes
+    print perc
     if perc > threshAdd:
     	# print 'add'
     	trigrams = getTrigrams(set([word]),trigrams)
@@ -155,6 +157,9 @@ def main():
 	global trigrams
 	global words
 	global dictionary
+	global prevLang
+	global prevWords
+	print "prev",prevLang,prevWords
 	word = request.form['params']
 	if word == "**reset**":
 	    # print "reset"
@@ -167,7 +172,9 @@ def main():
 	# print repr(word)
 	numWords = request.form['w']
 	# print numWords
-	if numWords == '1000':
+	if numWords == '1000' and (prevLang != lang or prevWords != numWords):
+		print "in if"
+		dictionary = Set()
 		if lang == 'eng':
 			words = getWords('engtrain.txt')
 			train = Set(words[:1000])
@@ -218,7 +225,9 @@ def main():
 				dictionary.add(w)
 			# word = word.decode('utf-8')
 
-	elif numWords == '100':
+	elif numWords == '100'and (prevLang != lang or prevWords != numWords):
+		print "in if"
+		dictionary = Set()
 		if lang == 'eng':
 			words = getWords('engtrain.txt')
 			train = Set(words[:100])
@@ -268,7 +277,8 @@ def main():
 				# print "add to dict", w
 				dictionary.add(w)
 			# word = word.decode('utf-8')
-
+	prevLang = lang
+	prevWords = numWords
 	word = word.strip()
 	if len(word.split()) > 1 and word[len(word)-1] == '.':
 		# print "to add to dict"
@@ -293,8 +303,10 @@ if __name__ == "__main__":
     # print "run"
     app.run()
 
-
-
-
-
+# words = getWords('engtrain.txt')
+# train = Set(words[:1000])
+# trigrams = getTrigrams(train)
+# # print trigrams
+# result = doTest("plne")
+# print result
 

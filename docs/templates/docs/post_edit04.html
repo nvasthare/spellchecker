@@ -21,8 +21,8 @@
 function runPyScript(input,lang){
         var jqXHR = $.ajax({
             type: "POST",
-            url: "http://natashavasthare.pythonanywhere.com/",
-            // url: "http://127.0.0.1:5000/",
+            // url: "http://natashavasthare.pythonanywhere.com/",
+            url: "http://127.0.0.1:5000/",
             async: false,
             data: {params : input, l : lang,w : '100'},
             datatype: "text",
@@ -141,7 +141,7 @@ function myFunction() {
                 $("#container").highlight({
                     words:  ["hello","world"],
                     width:  500,
-                    height: 250
+                    height: 25
                 });
             });
 
@@ -378,7 +378,9 @@ function myFunction() {
 <br>
 
 <h4> Some example sentences to type: </h4>
-<p> آنها آن را خوردند (They ate it) </p>
+<p> آنها آن را خوردند : They ate it </p>
+<p> ایران خوب است : Persia is nice</p>
+<p> پیتسبورگ خوب است : Pittsburgh is nice </p>
 <!-- <p> This is a snetnce. </p> -->
 
 <!-- <input type="textarea" id="textarea"  /> -->

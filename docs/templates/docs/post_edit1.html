@@ -21,8 +21,8 @@
 function runPyScript(input,lang){
         var jqXHR = $.ajax({
             type: "POST",
-            url: "http://natashavasthare.pythonanywhere.com/",
-            // url: "http://127.0.0.1:5000/",
+            // url: "http://natashavasthare.pythonanywhere.com/",
+            url: "http://127.0.0.1:5000/",
             async: false,
             data: {params : input, l : lang,w : '1000'},
             datatype: "text",
@@ -141,7 +141,7 @@ function myFunction() {
                 $("#container").highlight({
                     words:  ["hello","world"],
                     width:  500,
-                    height: 250
+                    height: 25
                 });
             });
 
@@ -378,6 +378,8 @@ function myFunction() {
 <br>
 
 <h4> Some example sentences to type: </h4>
+<p> Nueva York es bueno. </p>
+<p> Argentina es bueno. </p>
 <p> quiero clases para aprender español </p>
 <p> queiro clases para aprneder español </p>
 
