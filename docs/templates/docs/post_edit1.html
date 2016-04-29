@@ -21,8 +21,8 @@
 function runPyScript(input,lang){
         var jqXHR = $.ajax({
             type: "POST",
-            // url: "http://natashavasthare.pythonanywhere.com/",
-            url: "http://127.0.0.1:5000/",
+            url: "http://natashavasthare.pythonanywhere.com/",
+            // url: "http://127.0.0.1:5000/",
             async: false,
             data: {params : input, l : lang,w : '1000'},
             datatype: "text",
@@ -366,16 +366,7 @@ function myFunction() {
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 <h4> Some example sentences to type: </h4>
 <p> Nueva York es bueno. </p>
