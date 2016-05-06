@@ -1,5 +1,5 @@
 
-##Automatic Spelling Error Detection in Different Languages
+##Automatic Spelling Error Detection in Low-Resource Languages
 
 This is the code for my 15-400 research project.
 
